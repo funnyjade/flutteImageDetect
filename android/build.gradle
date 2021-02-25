@@ -1,0 +1,49 @@
+group 'ins.cashbull.detectimage'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.3.50'
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+        //Add this below <plugin_name> is whatever your plugin is called eg. url_launcher
+        flatDir {
+            dirs project(':flutter_detect_image').file('libs')
+            // e.g. dirs project(':url_launcher').file('libs')  - don't miss the ':'
+        }
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 29
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    defaultConfig {
+        minSdkVersion 21
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation(name: 'detect-image', ext: 'aar')
+}
