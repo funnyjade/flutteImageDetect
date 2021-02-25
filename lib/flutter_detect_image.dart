@@ -21,10 +21,10 @@ class FlutterDetectImage {
       final Map<String, dynamic> params = {
         "width": imgWidth,
         "height": imgHeight,
-        "rectX": rect.left,
-        "rectY": rect.top,
-        "rectW": rect.width,
-        "rectH": rect.height,
+        "rectX": rect.left.toInt(),
+        "rectY": rect.top.toInt(),
+        "rectW": rect.width.toInt(),
+        "rectH": rect.height.toInt(),
         "ratio": ratio,
       };
       print(params);
