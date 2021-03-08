@@ -41,12 +41,12 @@ class FlutterDetectImage {
     return false;
   }
 
-  static Future<LiveDetectResult> detectFace() async {
+  static Future<String> detectFace() async {
     try {
-      Map<String, dynamic> result = await _channel.invokeMethod('detectFace');
+      String result = await _channel.invokeMethod('detectFace');
 
       print("detectFace is : $result");
-      return LiveDetectResult.fromJson(result);
+      return result;
     } on Exception catch (e) {
       print(e);
     }
