@@ -1,5 +1,6 @@
 package ins.cashbull.detectimage
 
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.os.Handler
 import android.os.Looper
@@ -8,6 +9,7 @@ import androidx.annotation.NonNull
 import com.cashbull.detectimage.DetectImage
 import com.cashbull.detectimage.ImageFormatType
 import ins.cashbull.detectcamera.startLiveDetection
+import ins.cashbull.detectcamera.init
 import ins.cashbull.detectimage.utils.ThreadPoolUtils
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
@@ -19,6 +21,12 @@ import io.flutter.plugin.common.PluginRegistry.Registrar
 
 /** FlutterDetectImagePlugin */
 class FlutterDetectImagePlugin: FlutterPlugin, MethodCallHandler {
+
+  companion object{
+    fun initDetectImage(ctx: Context){
+      init(ctx)
+    }
+  }
 
   private val TAG = "DetectImagePlugin"
 
