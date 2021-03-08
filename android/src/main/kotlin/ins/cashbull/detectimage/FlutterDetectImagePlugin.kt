@@ -1,11 +1,13 @@
 package ins.cashbull.detectimage
 
+import android.graphics.BitmapFactory
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.annotation.NonNull
 import com.cashbull.detectimage.DetectImage
 import com.cashbull.detectimage.ImageFormatType
+import ins.cashbull.detectcamera.startLiveDetection
 import ins.cashbull.detectimage.utils.ThreadPoolUtils
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
@@ -39,6 +41,9 @@ class FlutterDetectImagePlugin: FlutterPlugin, MethodCallHandler {
         "detectRectangle" -> {
           detectRectangle(call, result)
         }
+        "detectFace" -> {
+          detectFace(call, result)
+        }
         else -> {
           result.notImplemented()
         }
@@ -65,7 +70,7 @@ class FlutterDetectImagePlugin: FlutterPlugin, MethodCallHandler {
    * @param methodCall
    * @param result
    */
-  private fun detectRectangle(methodCall: MethodCall, result: MethodChannel.Result) {
+  private fun detectRectangle(methodCall: MethodCall, result: Result) {
     ThreadPoolUtils.defaultPool.execute {
       try {
         val imgData: ByteArray? = methodCall.argument("imgData")
@@ -84,6 +89,24 @@ class FlutterDetectImagePlugin: FlutterPlugin, MethodCallHandler {
       } catch (e: Exception) {
         Handler(Looper.getMainLooper()).post { result.success(false) }
       }
+    }
+  }
+
+  /**
+   *
+   *
+   * 活体检测
+   * s Recur
+   *
+   * @param methodCall
+   * @param result
+   */
+  private fun detectFace(methodCall: MethodCall, result: Result) {
+    startLiveDetection({face, faceDetect ->
+      Handler(Looper.getMainLooper()).post { result.success(faceDetect) }
+    }){ code, msg ->
+      Handler(Looper.getMainLooper()).post { result.error(code.toString(), msg, msg) }
+//      toastShort("code: $code, msg: $msg")
     }
   }
 }
