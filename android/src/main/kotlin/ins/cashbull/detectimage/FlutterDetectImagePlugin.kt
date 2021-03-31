@@ -95,7 +95,11 @@ class FlutterDetectImagePlugin: FlutterPlugin, MethodCallHandler {
         Log.w(TAG, "detectRectangle detectResult: $detectResult")
         Handler(Looper.getMainLooper()).post { result.success(detectResult) }
       } catch (e: Exception) {
-        Handler(Looper.getMainLooper()).post { result.success(false) }
+        Handler(Looper.getMainLooper()).post {
+          try {
+          result.success(false)
+          } catch (e: Exception) {}
+        }
       }
     }
   }
