@@ -22,8 +22,8 @@ rootProject.allprojects {
 
         maven {
             credentials {
-                username username
-                password password
+                username detect_image_username
+                password detect_image_password
             }
             url 'https://packages.aliyun.com/maven/repository/2090899-release-WRGOCx/'
         }
