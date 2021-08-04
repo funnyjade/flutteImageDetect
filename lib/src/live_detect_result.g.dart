@@ -8,11 +8,11 @@ part of 'live_detect_result.dart';
 
 LiveDetectResult _$LiveDetectResultFromJson(Map<String, dynamic> json) {
   return LiveDetectResult(
-    json['left'] as int,
-    json['top'] as int,
-    json['right'] as int,
-    json['bottom'] as int,
-    json['confidence'] as int,
+    json['left'] as int?,
+    json['top'] as int?,
+    json['right'] as int?,
+    json['bottom'] as int?,
+    json['confidence'] as int?,
   );
 }
 
