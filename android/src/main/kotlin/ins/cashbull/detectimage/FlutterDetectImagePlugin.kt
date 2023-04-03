@@ -17,6 +17,7 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.Registrar
+import java.lang.Exception
 
 
 /** FlutterDetectImagePlugin */
@@ -115,7 +116,12 @@ class FlutterDetectImagePlugin: FlutterPlugin, MethodCallHandler {
    */
   private fun detectFace(methodCall: MethodCall, result: Result) {
     startLiveDetection({face, faceDetect ->
-      Handler(Looper.getMainLooper()).post { result.success(faceDetect) }
+      Handler(Looper.getMainLooper()).post {
+        try {
+          result.success(faceDetect)
+        } catch (e: java.lang.Exception) {
+        }
+      }
     }){ code, msg ->
       Handler(Looper.getMainLooper()).post { result.error(code.toString(), msg, msg) }
 //      toastShort("code: $code, msg: $msg")
