@@ -4,7 +4,6 @@ import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_detect_image/src/live_detect_result.dart';
 
 class FlutterDetectImage {
   static const MethodChannel _channel =
